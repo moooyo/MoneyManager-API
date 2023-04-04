@@ -1,6 +1,10 @@
 package login
 
-import "github.com/gin-gonic/gin"
+import (
+	"MoneyManager/src/utility/log"
+
+	"github.com/gin-gonic/gin"
+)
 
 type LoginParams struct {
 	Username string `json:"username"`
@@ -9,10 +13,10 @@ type LoginParams struct {
 
 func Login(context *gin.Context) {
 	var param LoginParams
-	if err := context.Bind(param) {
-		context.JSON(200, gin.H{
-			"message": "error",
-		})
+	if err := context.Bind(param); err != nil {
+		log.TrackError(context, err)
 		return
 	}
+
+	log.TrackTrace(context, "login success", param.Username, param.Password)
 }

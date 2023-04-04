@@ -1,10 +1,10 @@
-package routers
+package router
 
 import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetRouters(r *gin.Engine) {
-	UseUserRouters(r.Group("/user"))
-	UseLoginRouters(r.Group("/login"))
+func UseRouters(r *gin.Engine) {
+	useUserRouters(r.Group("/user"))
+	useLoginRouters(r.Group("/login"))
 }

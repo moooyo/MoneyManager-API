@@ -1,7 +1,7 @@
-package routers
+package router
 
 import "github.com/gin-gonic/gin"
 
-func SetUserRouters(g *gin.RouterGroup) {
+func useUserRouters(g *gin.RouterGroup) {
 
 }
