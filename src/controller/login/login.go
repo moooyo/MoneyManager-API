@@ -18,5 +18,5 @@ func Login(context *gin.Context) {
 		return
 	}
 
-	log.TrackTrace(context, "login success", param.Username, param.Password)
+	log.TrackTrace(context, "login success", "UserName", param.Username, "Password", param.Password)
 }
