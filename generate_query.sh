@@ -14,3 +14,7 @@ rm -f ./src/query/*.gen.go
 
 # generate
 ./generate_query
+
+# clean up
+rm -f ./generate_query
+rm -f ./MoneyManager

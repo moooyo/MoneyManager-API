@@ -17,26 +17,26 @@ import (
 
 func Use(db *gorm.DB, opts ...gen.DOOption) *Query {
 	return &Query{
-		db:      db,
-		Comment: newComment(db, opts...),
-		Data:    newData(db, opts...),
+		db:    db,
+		Data:  newData(db, opts...),
+		Money: newMoney(db, opts...),
 	}
 }
 
 type Query struct {
 	db *gorm.DB
 
-	Comment comment
-	Data    data
+	Data  data
+	Money money
 }
 
 func (q *Query) Available() bool { return q.db != nil }
 
 func (q *Query) clone(db *gorm.DB) *Query {
 	return &Query{
-		db:      db,
-		Comment: q.Comment.clone(db),
-		Data:    q.Data.clone(db),
+		db:    db,
+		Data:  q.Data.clone(db),
+		Money: q.Money.clone(db),
 	}
 }
 
@@ -50,21 +50,21 @@ func (q *Query) WriteDB() *Query {
 
 func (q *Query) ReplaceDB(db *gorm.DB) *Query {
 	return &Query{
-		db:      db,
-		Comment: q.Comment.replaceDB(db),
-		Data:    q.Data.replaceDB(db),
+		db:    db,
+		Data:  q.Data.replaceDB(db),
+		Money: q.Money.replaceDB(db),
 	}
 }
 
 type queryCtx struct {
-	Comment *commentDo
-	Data    *dataDo
+	Data  *dataDo
+	Money *moneyDo
 }
 
 func (q *Query) WithContext(ctx context.Context) *queryCtx {
 	return &queryCtx{
-		Comment: q.Comment.WithContext(ctx),
-		Data:    q.Data.WithContext(ctx),
+		Data:  q.Data.WithContext(ctx),
+		Money: q.Money.WithContext(ctx),
 	}
 }
 

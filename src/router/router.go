@@ -1,10 +1,10 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func UseRouters(r *gin.Engine) {
-	useUserRouters(r.Group("/user"))
-	useLoginRouters(r.Group("/login"))
+func UseRouters(app *fiber.App) {
+	useUserRouters(app.Group("/user"))
+	useLoginRouters(app.Group("/login"))
 }

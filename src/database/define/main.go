@@ -14,7 +14,7 @@ func NewGenerator() *gen.Generator {
 
 func main() {
 	g := NewGenerator()
-	generateComment(g)
+	generateMoney(g)
 	generateUser(g)
 	g.Execute()
 }

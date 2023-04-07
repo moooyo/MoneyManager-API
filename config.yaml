@@ -1,0 +1,34 @@
+# Please note the format of this configuration.
+app:
+  # Log type：console、file、synology、appInsights
+  logtype: console
+  # Log path：if log path set to file
+  logpath:
+  # Wall paper：Get bing day picture
+  wallpaper: bing
+  # Debug mode
+  debug: true
+
+database:
+  # Type：sqlite | mysql
+  type: sqlite
+  # File Path：If type is sqlite
+  path: "data.db"
+  # Host：if type is mysql
+  host: ""
+  # Port：If type is mysql
+  port: 3306
+  # UserName: database user name
+  username: ""
+  # Password: database password
+  password: ""
+
+api:
+  # Type: tiantianjijin | futu
+  type: tiantianjijin
+  # Host: api host
+  host: ""
+  # Secret: secret key
+  secret: ""
+  # User Agent：Used by call to api
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36"

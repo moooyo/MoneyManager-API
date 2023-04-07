@@ -1,22 +1,16 @@
 package main
 
 import (
+	"MoneyManager/src/database"
 	"MoneyManager/src/router"
-	"net/http"
 
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
 // use gin to create a web server
 func main() {
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{
-			"message": "pong",
-		})
-	})
-
-	router.UseRouters(r)
-
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	app := fiber.New()
+	router.UseRouters(app)
+	database.InitDB()
+	app.Listen(":30000")
 }
