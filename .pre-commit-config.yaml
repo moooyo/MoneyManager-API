@@ -18,4 +18,4 @@ repos:
     - id: go-unit-tests
     - id: go-build
     - id: go-mod-tidy
-default_stages: [pre-push]
+default_install_hook_types: [pre-push]
