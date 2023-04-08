@@ -7,7 +7,7 @@ pip3 install pre-commit
 curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin v1.52.2
 
 # Install pre commit to .git
-pre-commit install
+pre-commit install --install-hooks --overwrite
 
 # Run against all the files
 pre-commit run --all-files
