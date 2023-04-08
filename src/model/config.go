@@ -14,6 +14,7 @@ type Database struct {
 	Port     uint
 	UserName string
 	Password string
+	DBName   string
 }
 
 type API struct {

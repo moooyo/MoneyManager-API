@@ -11,6 +11,6 @@ import (
 func main() {
 	app := fiber.New()
 	router.UseRouters(app)
-	database.InitDB()
+	database.Init()
 	app.Listen(":30000")
 }
