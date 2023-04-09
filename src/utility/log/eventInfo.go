@@ -1,7 +1,7 @@
 package log
 
 type EventInfo struct {
-	Event            string
+	Name             string
 	CustomDimensions map[string]string
 }
 

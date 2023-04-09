@@ -8,6 +8,8 @@ app:
   wallpaper: bing
   # Debug mode
   debug: true
+  # Port
+  port: 3000
 
 database:
   # Type：sqlite | mysql

@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameData = "data"
+const TableNameUser = "User"
 
-// Data mapped from table <data>
-type Data struct {
+// User mapped from table <User>
+type User struct {
 	ID       uint   `gorm:"column:id;type:bigint unsigned;primaryKey;autoIncrement:true" json:"id"` // key id
 	UserName string `json:"user_name"`                                                              // username
 	Password string `json:"password"`                                                               // password

@@ -5,6 +5,7 @@ type App struct {
 	LogPath   string
 	WallPaper string
 	Debug     bool
+	Port      uint
 }
 
 type Database struct {

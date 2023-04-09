@@ -63,3 +63,14 @@ func (logger *LoggerBuffer[T]) autoWrite() {
 		}
 	}()
 }
+
+func MakeBuffer[T any](bufferSize int, interval int, f func([]T)) *LoggerBuffer[T] {
+	return &LoggerBuffer[T]{
+		lock:          &sync.Mutex{},
+		buffer:        make([]T, 0, bufferSize),
+		bufferChannel: make(chan ([]T)),
+		maxBufferSize: bufferSize,
+		flushInterval: interval,
+		writeFunc:     f,
+	}
+}

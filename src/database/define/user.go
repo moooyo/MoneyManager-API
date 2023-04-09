@@ -13,8 +13,8 @@ type UserQuerier interface {
 
 func GetUser() helper.Object {
 	return &Model{
-		structName: "Data",
-		tableName:  "data",
+		structName: "User",
+		tableName:  "User",
 		fileName:   "user",
 		fields: []helper.Field{
 			&ModelField{

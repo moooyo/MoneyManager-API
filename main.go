@@ -3,14 +3,16 @@ package main
 import (
 	"MoneyManager/src/database"
 	"MoneyManager/src/router"
+	"MoneyManager/src/utility/utils"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-// use gin to create a web server
 func main() {
 	app := fiber.New()
 	router.UseRouters(app)
 	database.Init()
-	app.Listen(":30000")
+	config := utils.GetConfig()
+	app.Listen(fmt.Sprintf(":%d", config.App.Port))
 }

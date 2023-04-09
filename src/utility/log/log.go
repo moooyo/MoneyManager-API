@@ -1,8 +1,12 @@
 package log
 
-import "github.com/gin-gonic/gin"
+import (
+	"context"
 
-func TrackTrace(context *gin.Context, message string, args ...string) {
+	"github.com/gofiber/fiber/v2"
+)
+
+func TrackTrace(ctx *context.Context, message string, args ...string) {
 	val, exist := context.Get("logger")
 	if !exist {
 		panic("logger not exist")
@@ -15,7 +19,7 @@ func TrackTrace(context *gin.Context, message string, args ...string) {
 	logger.TrackTrace(message, args...)
 }
 
-func TrackEvent(context *gin.Context, eventName string, args ...string) {
+func TrackEvent(context *fiber.Ctx, eventName string, args ...string) {
 	val, exist := context.Get("logger")
 	if !exist {
 		panic("logger not exist")
@@ -28,7 +32,7 @@ func TrackEvent(context *gin.Context, eventName string, args ...string) {
 	logger.TrackEvent(eventName, args...)
 }
 
-func TrackError(context *gin.Context, err error, args ...string) {
+func TrackError(context *fiber.Ctx, err error, args ...string) {
 	val, exist := context.Get("logger")
 	if !exist {
 		panic("logger not exist")

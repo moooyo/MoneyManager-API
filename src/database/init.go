@@ -2,6 +2,7 @@ package database
 
 import (
 	"MoneyManager/src/model"
+	"MoneyManager/src/query"
 	"MoneyManager/src/utility/log"
 	"MoneyManager/src/utility/utils"
 	"fmt"
@@ -42,6 +43,10 @@ func initSqlite(config *model.Config) *gorm.DB {
 
 func GetDB() *gorm.DB {
 	return db
+}
+
+func GetQuery() *query.Query {
+	return query.Use(db)
 }
 
 func Init() {
