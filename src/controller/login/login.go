@@ -29,10 +29,13 @@ func Login(context *fiber.Ctx) {
 	user, err := query.User.WithContext(context.Context()).FilterWithUsernameAndPassword(param.Username, param.Password)
 	if err != nil {
 		log.TrackError(context.Context(), err)
-		context.JSON(LoginResponse{
+		if err := context.JSON(LoginResponse{
 			Message: "Invalid username or password",
-		})
-		context.SendStatus(400)
+		}); err != nil {
+			log.TrackError(context.Context(), err)
+		}
+
+		_ = context.SendStatus(400)
 	}
 
 	if len(user) > 0 {

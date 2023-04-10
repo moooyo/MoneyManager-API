@@ -14,5 +14,5 @@ func main() {
 	router.UseRouters(app)
 	database.Init()
 	config := utils.GetConfig()
-	app.Listen(fmt.Sprintf(":%d", config.App.Port))
+	_ = app.Listen(fmt.Sprintf(":%d", config.App.Port))
 }

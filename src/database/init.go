@@ -5,6 +5,7 @@ import (
 	"MoneyManager/src/query"
 	"MoneyManager/src/utility/log"
 	"MoneyManager/src/utility/utils"
+	"context"
 	"fmt"
 
 	"gorm.io/driver/mysql"
@@ -24,7 +25,7 @@ func initMysql(config *model.Config) *gorm.DB {
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.TrackError(nil, err)
+		log.TrackError(context.TODO(), err)
 		panic(err)
 	}
 
@@ -34,7 +35,7 @@ func initMysql(config *model.Config) *gorm.DB {
 func initSqlite(config *model.Config) *gorm.DB {
 	db, err := gorm.Open(sqlite.Open(config.Database.FilePath), &gorm.Config{})
 	if err != nil {
-		log.TrackError(nil, err)
+		log.TrackError(context.TODO(), err)
 		panic(err)
 	}
 

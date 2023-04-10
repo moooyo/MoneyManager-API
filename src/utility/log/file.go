@@ -1,11 +1,6 @@
 package log
 
-import (
-	"fmt"
-	"os"
-	"sync"
-)
-
+/*
 type FileLogger struct {
 	File         *os.File
 	lock         *sync.Mutex
@@ -21,3 +16,4 @@ func (logger FileLogger) Init() {
 	logger.File = file
 	logger.lock = new(sync.Mutex)
 }
+*/
