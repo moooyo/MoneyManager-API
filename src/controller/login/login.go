@@ -3,6 +3,7 @@ package login
 import (
 	"MoneyManager/src/database"
 	"MoneyManager/src/utility/log"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -12,20 +13,31 @@ type LoginParams struct {
 	Password string `json:"password"`
 }
 
+type LoginResponse struct {
+	Message string
+}
+
 func Login(context *fiber.Ctx) {
 	var param LoginParams
 	if err := context.BodyParser(param); err != nil {
-		log.TrackError(context, err)
+		log.TrackError(context.Context(), err)
 		return
 	}
 
 	query := database.GetQuery()
 
-	user, err := query.User.WithContext(context).FilterWithUsernameAndPassword(param.Username, param.Password)
+	user, err := query.User.WithContext(context.Context()).FilterWithUsernameAndPassword(param.Username, param.Password)
 	if err != nil {
-		log.TrackError(context, err)
-		context.JSON(400)
+		log.TrackError(context.Context(), err)
+		context.JSON(LoginResponse{
+			Message: "Invalid username or password",
+		})
+		context.SendStatus(400)
 	}
 
-	log.TrackTrace(context, "login success", "UserName", param.Username, "Password", param.Password)
+	if len(user) > 0 {
+		log.TrackTrace(context.Context(), "login success", "UID", fmt.Sprintf("%d", user[0].ID))
+	}
+
+	log.TrackTrace(context.Context(), "login success", "UserName", param.Username, "Password", param.Password)
 }

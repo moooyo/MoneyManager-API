@@ -2,45 +2,22 @@ package log
 
 import (
 	"context"
-
-	"github.com/gofiber/fiber/v2"
 )
 
-func TrackTrace(ctx *context.Context, message string, args ...string) {
-	val, exist := context.Get("logger")
-	if !exist {
-		panic("logger not exist")
-	}
-	logger, ok := val.(Logger)
-	if !ok {
-		panic("logger type error")
-	}
+func TrackTrace(ctx context.Context, message string, args ...string) {
+	logger := GetLogger()
 
 	logger.TrackTrace(message, args...)
 }
 
-func TrackEvent(context *fiber.Ctx, eventName string, args ...string) {
-	val, exist := context.Get("logger")
-	if !exist {
-		panic("logger not exist")
-	}
-	logger, ok := val.(Logger)
-	if !ok {
-		panic("logger type error")
-	}
+func TrackEvent(ctx context.Context, eventName string, args ...string) {
+	logger := GetLogger()
 
 	logger.TrackEvent(eventName, args...)
 }
 
-func TrackError(context *fiber.Ctx, err error, args ...string) {
-	val, exist := context.Get("logger")
-	if !exist {
-		panic("logger not exist")
-	}
-	logger, ok := val.(Logger)
-	if !ok {
-		panic("logger type error")
-	}
+func TrackError(ctx context.Context, err error, args ...string) {
+	logger := GetLogger()
 
 	logger.TrackError(err, args...)
 }

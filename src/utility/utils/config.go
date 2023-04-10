@@ -2,7 +2,6 @@ package utils
 
 import (
 	"MoneyManager/src/model"
-	"MoneyManager/src/utility/log"
 	"flag"
 	"os"
 	"sync"
@@ -20,7 +19,7 @@ func init() {
 	configOnce.Do(func() {
 		config, err := LoadConfig(*configPath)
 		if err != nil {
-			log.TrackError(nil, err)
+			//log.TrackError(nil, err)
 			panic(err)
 		}
 		configInstance = config
@@ -34,20 +33,20 @@ func GetConfig() *model.Config {
 func LoadConfig(path string) (*model.Config, error) {
 	file, err := os.OpenFile(path, os.O_RDONLY, 0666)
 	if err != nil {
-		log.TrackError(nil, err)
+		//log.TrackError(nil, err)
 		return nil, err
 	}
 	defer file.Close()
 	var data []byte
 	_, err = file.Read(data)
 	if err != nil {
-		log.TrackError(nil, err)
+		//log.TrackError(nil, err)
 		return nil, err
 	}
 
 	config, err := ParseConfig(data)
 	if err != nil {
-		log.TrackError(nil, err)
+		//log.TrackError(nil, err)
 		return nil, err
 	}
 
@@ -58,7 +57,7 @@ func ParseConfig(data []byte) (*model.Config, error) {
 	var config model.Config
 	err := yaml.Unmarshal(data, &config)
 	if err != nil {
-		log.TrackError(nil, err)
+		//log.TrackError(nil, err)
 		return nil, err
 	}
 	return &config, nil

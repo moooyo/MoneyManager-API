@@ -1,18 +1,37 @@
 package log
 
+import (
+	"MoneyManager/src/utility/utils"
+	"sync"
+)
+
 type Logger interface {
-	Init()
 	TrackTrace(string, ...string)
 	TrackEvent(string, ...string)
 	TrackError(error, ...string)
 }
 
-var initLoggerFunc map[string]func(name string) *Logger = map[string]func(name string) *Logger{
-	"console": func(name string) *Logger {
-		return NewConsoleLogger(name)
-	},
+var initLoggerFunc map[string]func() Logger = map[string]func() Logger{
+	"console": NewConsoleLogger,
 }
 
-func InitLogger() {
+var logger Logger
+var loggerDoOnce sync.Once
 
+func InitLogger() {
+	cfg := utils.GetConfig()
+	if f, ok := initLoggerFunc[cfg.App.LogType]; ok {
+		logger = f()
+		return
+	}
+
+	panic("Invalid log type")
+}
+
+func GetLogger() Logger {
+	loggerDoOnce.Do(func() {
+		InitLogger()
+	})
+
+	return logger
 }
